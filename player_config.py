@@ -1,5 +1,7 @@
 import pygame
 from settings import *
+from bullet import Bullet
+from pygame import mixer
 
 class PlayerConfig():
     global screen
@@ -9,7 +11,22 @@ class PlayerConfig():
         self.X = x_position
         self.Y = y_position
     
+    def movimento(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] and self.X > 0:
+            self.X -= 1*(x_pix*y_pix)/(800*600)
+        if keys[pygame.K_RIGHT] and self.X < x_pix - 64:
+            self.X += (x_pix*y_pix)/(800*600)
     
+    def fire(self, bullet: Bullet):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            bullet.change_state('fire')
+            bullet.change_position(self.X, self.Y)
+            bullet.blit(self.X, self.Y)
+            bullet_sound = mixer.Sound('./sounds/laser.wav')
+            bullet_sound.play()
+            
     def change_position(self, new_x):
         self.X = new_x
     

@@ -2,6 +2,7 @@ import pygame
 from settings import *
 
 class Bullet():
+    global bullet_state, bulletX, bulletY, bullet_sound
     # Bullet: stopped --> não consegue ver na tela
     # Bullet: fire --> atirando (movendo)
     def __init__(self, image_srg: str = './img/001-bullet.png', 

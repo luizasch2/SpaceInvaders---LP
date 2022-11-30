@@ -201,6 +201,14 @@ while True:
     if move.mode == 'GAME':
         backgrond = support_images["game"]
         playerX_change = 0
+
+        player.movimento()
+        player.change_position(player.X + playerX_change)
+        if background != support_images["gameover"]:
+            if bullet.state == 'stopped':
+                player.fire(bullet=bullet)
+
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -208,20 +216,7 @@ while True:
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    playerX_change = -1*(x_pix*y_pix)/(800*600)
-                if event.key == pygame.K_RIGHT:
-                    playerX_change = 1*(x_pix*y_pix)/(800*600)
-                
-                player.change_position(player.X + playerX_change)
 
-                if event.key == pygame.K_SPACE:
-                    if background != support_images["gameover"]:
-                        if bullet.state == 'stopped':
-                            bullet_sound = mixer.Sound('./sounds/laser.wav')
-                            bullet_sound.play()
-                            bullet.X = player.X
-                            bullet.fire(bullet.X, bullet.Y)
                 if event.key == pygame.K_r:
                     move.restart()
 
