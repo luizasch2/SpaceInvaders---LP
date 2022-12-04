@@ -29,15 +29,6 @@ class Enemy():
         self.X = new_x
         self.Y = new_y
     
-    def move(self):
-        self.X += self.vel
-        if self.X <= 0:
-            self.vel = 0.5
-            self.Y += 40
-        elif self.X >= x_pix - 64:
-            self.vel = -0.5
-            self.Y += 40
-    
     def change_vel(self, new_vel):
         self.vel = new_vel
     

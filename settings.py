@@ -11,8 +11,6 @@ elif x_pix == 1024 and y_pix == 768:
 
 def scene_config(title = "Space Invaders", image = './img/MENU.png', sound = './sounds/background.wav'):
     global screen, x_pix, y_pix, background, background_sound
-    x_pix = 800
-    y_pix = 600
     ## title
     pygame.display.set_caption(title)
     ## background image

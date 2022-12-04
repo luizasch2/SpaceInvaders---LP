@@ -13,9 +13,9 @@ class PlayerConfig():
     
     def movimento(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and self.X > 0:
+        if keys[pygame.K_LEFT]:
             self.X -= 1*(x_pix*y_pix)/(800*600)
-        if keys[pygame.K_RIGHT] and self.X < x_pix - 64:
+        if keys[pygame.K_RIGHT]:
             self.X += (x_pix*y_pix)/(800*600)
     
     def fire(self, bullet: Bullet):
@@ -29,6 +29,10 @@ class PlayerConfig():
             
     def change_position(self, new_x):
         self.X = new_x
+
+    def change_spawn(self, new_x, new_y):
+        self.X = new_x
+        self.Y = new_y
     
     def change_image(self, image_src: str):
         self.image = pygame.image.load(image_src)

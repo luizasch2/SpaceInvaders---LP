@@ -65,14 +65,16 @@ while True:
                     move.mode = 'OPT'
                 if event.key == pygame.K_1:
                     support_images = support_images_big
-                    change_res(1024, 768)
-                    player = PlayerConfig()
+                    x_pix, y_pix = 1024, 768
+                    change_res(x_pix, y_pix)
+                    player.change_spawn(x_pix/2 - 30, y_pix - 120)
                     enemies = [Enemy() for _ in range(6)]
                     bullet = Bullet()
                 if event.key == pygame.K_ESCAPE:
                     support_images = support_images_small
-                    change_res(800, 600)
-                    player = PlayerConfig()
+                    x_pix, y_pix = 800, 600
+                    change_res(x_pix, y_pix)
+                    player.change_spawn(x_pix/2 - 30, y_pix - 120)
                     enemies = [Enemy() for _ in range(6)]
                     bullet = Bullet()
 
@@ -297,7 +299,7 @@ while True:
         screen.blit(text, textRect)
 
         # dificuldades
-        if move.score >= 10:
+        if move.score == 10:
             for enemy in enemies:
                 enemy.change_to_skin_hard()
                 enemy.change_vel(1)
