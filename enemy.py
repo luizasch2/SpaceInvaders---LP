@@ -3,8 +3,7 @@ from settings import *
 import random
 
 class Enemy():
-    def __init__(self, skin_src: str = './img/002-ghost.png', x_position: float = random.randint(65, x_pix - 65), 
-                y_position: float = random.randint(75, 150), skin_hard_src: str =  './img/003-ghost.png',
+    def __init__(self, x_position, y_position, skin_src: str = './img/002-ghost.png', skin_hard_src: str =  './img/003-ghost.png',
                 vel: float = 0.5, state: str = 'ready'):
         ## iniciais definidos:
         ## enemySkin = pygame.image.load('./img/002-ghost.png')

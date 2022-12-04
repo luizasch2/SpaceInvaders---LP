@@ -18,7 +18,7 @@ background = scene_config()
 move = Move()
 player = PlayerConfig()
 bullet = Bullet()
-enemies = [Enemy() for _ in range(num_of_enemies)]
+enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
 bullet_enemy = Bullet()
 bullet_enemy.config_enemy_image()
 
