@@ -16,12 +16,7 @@ support_images = support_images_small
 
 background = scene_config()
 move = Move()
-player = PlayerConfig()
-bullet = Bullet()
-enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
-for enemy in enemies:
-    enemy.bullet = Bullet()
-    enemy.bullet.config_enemy_image()
+EZ = True
 
 while True:
     screen.blit(background, (0, 0))
@@ -34,8 +29,16 @@ while True:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                        background = support_images["game"]
-                        move.mode = 'GAME'
+                    player = PlayerConfig()
+                    bullet = Bullet()
+                    enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
+                    for enemy in enemies:
+                        enemy.bullet = Bullet()
+                        enemy.bullet.config_enemy_image()
+                        enemy.bullet.change_position(enemy.X, enemy.Y)
+                    player.change_spawn(x_pix/2 - 30, y_pix - 120)
+                    background = support_images["game"]
+                    move.mode = 'GAME'
                 if event.key == pygame.K_ESCAPE:
                     move.mode = 'OPT'
 
@@ -279,7 +282,7 @@ while True:
  
 
             if ep or bp:
-                player.change_position(x_pix)
+                player.Y = y_pix
                 for ind_enemy in enemies:
                     ind_enemy.change_position(x_pix, y_pix)
                 background = support_images["gameover"]
@@ -309,8 +312,10 @@ while True:
 
         # dificuldades
         if move.score == 10:
-            for enemy in enemies:
-                enemy.change_to_skin_hard()
-                enemy.change_vel(1)
+            if EZ:
+                for enemy in enemies:
+                    enemy.change_to_skin_hard()
+                    enemy.change_vel(1)
+                    EZ = False
 
     pygame.display.update()

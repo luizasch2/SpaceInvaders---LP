@@ -30,7 +30,7 @@ class Move():
     def restart(self):
         self.mode = 'MENU'
         self.score = 0
-        return PlayerConfig(), Enemy(), Bullet()
+        return PlayerConfig(), Bullet()
     
     def change_mode(self, new_mode: str):
         ## MENU, OPT, RES, CSS, NAVE, MONSTER, BALA, GAMEOVER, GAME
