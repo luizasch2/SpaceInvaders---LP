@@ -19,8 +19,9 @@ move = Move()
 player = PlayerConfig()
 bullet = Bullet()
 enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
-bullet_enemy = Bullet()
-bullet_enemy.config_enemy_image()
+for enemy in enemies:
+    enemy.bullet = Bullet()
+    enemy.bullet.config_enemy_image()
 
 while True:
     screen.blit(background, (0, 0))
@@ -65,17 +66,25 @@ while True:
                     move.mode = 'OPT'
                 if event.key == pygame.K_1:
                     support_images = support_images_big
+                    num_of_enemies = 10
                     x_pix, y_pix = 1024, 768
                     change_res(x_pix, y_pix)
                     player.change_spawn(x_pix/2 - 30, y_pix - 120)
-                    enemies = [Enemy() for _ in range(6)]
+                    enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
+                    for enemy in enemies:
+                        enemy.bullet = Bullet()
+                        enemy.bullet.config_enemy_image()
                     bullet = Bullet()
                 if event.key == pygame.K_ESCAPE:
+                    num_of_enemies = 6
                     support_images = support_images_small
                     x_pix, y_pix = 800, 600
                     change_res(x_pix, y_pix)
                     player.change_spawn(x_pix/2 - 30, y_pix - 120)
-                    enemies = [Enemy() for _ in range(6)]
+                    enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
+                    for enemy in enemies:
+                        enemy.bullet = Bullet()
+                        enemy.bullet.config_enemy_image()
                     bullet = Bullet()
 
     if move.mode == 'CSS':
@@ -248,12 +257,12 @@ while True:
 
             # #bala do inimigo
             if i%3 == 0:
-                if bullet_enemy.Y >= y_pix:
-                    bullet_enemy.Y = enemy.Y
-                    bullet_enemy.X = enemy.X
-                if bullet_enemy.Y <= y_pix:
-                    bullet_enemy.change_position(bullet_enemy.X, bullet_enemy.Y + (x_pix*y_pix)/(800*600)/2)
-                bullet_enemy.blit(bullet_enemy.X, bullet_enemy.Y)
+                if enemy.bullet.Y >= y_pix:
+                    enemy.bullet.Y = enemy.Y
+                    enemy.bullet.X = enemy.X
+                if enemy.bullet.Y <= y_pix:
+                    enemy.bullet.change_position(enemy.bullet.X, enemy.bullet.Y + (x_pix*y_pix)/(800*600)/2)
+                enemy.bullet.blit(enemy.bullet.X, enemy.bullet.Y)
 
             
             if collision:
@@ -266,7 +275,7 @@ while True:
 
 
             ep = move.coliep(enemy.X, enemy.Y, player.X, player.Y)
-            bp = move.coliep(bullet_enemy.X, bullet_enemy.Y, player.X, player.Y)
+            bp = move.coliep(enemy.bullet.X, enemy.bullet.Y, player.X, player.Y)
  
 
             if ep or bp:
