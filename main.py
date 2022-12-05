@@ -15,6 +15,13 @@ pygame.init()
 support_images = support_images_small
 
 background = scene_config()
+player = PlayerConfig()
+bullet = Bullet()
+enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
+for enemy in enemies:
+    enemy.bullet = Bullet()
+    enemy.bullet.config_enemy_image()
+    enemy.bullet.change_position(enemy.X, enemy.Y)
 move = Move()
 EZ = True
 
@@ -29,13 +36,6 @@ while True:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    player = PlayerConfig()
-                    bullet = Bullet()
-                    enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
-                    for enemy in enemies:
-                        enemy.bullet = Bullet()
-                        enemy.bullet.config_enemy_image()
-                        enemy.bullet.change_position(enemy.X, enemy.Y)
                     player.change_spawn(x_pix/2 - 30, y_pix - 120)
                     background = support_images["game"]
                     move.mode = 'GAME'
@@ -232,6 +232,11 @@ while True:
             if event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_r:
+                    enemies = [Enemy(random.randint(65, x_pix - 65), random.randint(75, 150)) for _ in range(num_of_enemies)]
+                    for enemy in enemies:
+                        enemy.bullet = Bullet()
+                        enemy.bullet.config_enemy_image()
+                        enemy.bullet.change_position(enemy.X, enemy.Y)
                     move.restart()
 
             if event.type == pygame.KEYUP:
